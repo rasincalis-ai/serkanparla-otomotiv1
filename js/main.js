@@ -1,109 +1,322 @@
-(function ($) {
-    "use strict";
+// Serkan Parla Otomotiv - Main JavaScript
+
+(function() {
+    'use strict';
+
+    // ==================== NAVBAR SCROLL EFFECT ====================
+    const navbar = document.getElementById('mainNavbar');
     
-    // loader
-    var loader = function () {
-        setTimeout(function () {
-            if ($('#loader').length > 0) {
-                $('#loader').removeClass('show');
-            }
-        }, 1);
-    };
-    loader();
-    
-    
-    // Initiate the wowjs
-    new WOW().init();
-    
-    
-    // Back to top button
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 200) {
-            $('.back-to-top').fadeIn('slow');
+    function handleScroll() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
         } else {
-            $('.back-to-top').fadeOut('slow');
+            navbar.classList.remove('scrolled');
         }
-    });
-    $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
-        return false;
-    });
-    
-    
-    // Sticky Navbar
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 0) {
-            $('.navbar').addClass('nav-sticky');
-        } else {
-            $('.navbar').removeClass('nav-sticky');
-        }
-    });
-    
-    
-    // Smooth scrolling on the navbar links
-    $(".navbar-nav a").on('click', function (event) {
-        if (this.hash !== "") {
-            event.preventDefault();
-            
-            $('html, body').animate({
-                scrollTop: $(this.hash).offset().top - 45
-            }, 1500, 'easeInOutExpo');
-            
-            if ($(this).parents('.navbar-nav').length) {
-                $('.navbar-nav .active').removeClass('active');
-                $(this).closest('a').addClass('active');
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    // ==================== SMOOTH SCROLL FOR LINKS ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href !== '') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const navbarCollapse = document.getElementById('navbarNav');
+                    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        });
+                        bsCollapse.hide();
+                    }
+                }
             }
-        }
-    });
-    
-    
-    // Typed Initiate
-    if ($('.hero .hero-text h2').length == 1) {
-        var typed_strings = $('.hero .hero-text .typed-text').text();
-        var typed = new Typed('.hero .hero-text h2', {
-            strings: typed_strings.split(', '),
-            typeSpeed: 100,
-            backSpeed: 20,
-            smartBackspace: false,
-            loop: true
         });
+    });
+
+    // ==================== VEHICLE FILTERING ====================
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const vehicleItems = document.querySelectorAll('.vehicle-item');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Filter vehicles
+            vehicleItems.forEach(item => {
+                if (filter === 'all') {
+                    item.classList.remove('hide');
+                    setTimeout(() => {
+                        item.style.display = '';
+                    }, 10);
+                } else {
+                    if (item.classList.contains(filter)) {
+                        item.classList.remove('hide');
+                        setTimeout(() => {
+                            item.style.display = '';
+                        }, 10);
+                    } else {
+                        item.classList.add('hide');
+                    }
+                }
+            });
+        });
+    });
+
+    // ==================== SCROLL TO TOP BUTTON ====================
+    const scrollTopBtn = document.getElementById('scrollTop');
+    
+    function toggleScrollTopButton() {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('show');
+        } else {
+            scrollTopBtn.classList.remove('show');
+        }
     }
     
+    window.addEventListener('scroll', toggleScrollTopButton);
     
-    // Skills
-    $('.skills').waypoint(function () {
-        $('.progress .progress-bar').each(function () {
-            $(this).css("width", $(this).attr("aria-valuenow") + '%');
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-    }, {offset: '80%'});
+    });
 
-
-    // Testimonials carousel
-    $(".testimonials-carousel").owlCarousel({
-        center: true,
-        autoplay: true,
-        dots: true,
-        loop: true,
-        responsive: {
-            0:{
-                items:1
+    // ==================== FORM VALIDATION & HANDLING ====================
+    
+    // Evaluation Form
+    const evaluationForm = document.getElementById('evaluationForm');
+    if (evaluationForm) {
+        evaluationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Basic validation
+            if (!data.brand || !data.model || !data.year || !data.km || !data.phone) {
+                alert('Lütfen tüm zorunlu alanları doldurun.');
+                return;
             }
+            
+            // Phone validation (basic)
+            const phonePattern = /^[0-9]{10,11}$/;
+            const cleanPhone = data.phone.replace(/\s/g, '');
+            if (!phonePattern.test(cleanPhone)) {
+                alert('Lütfen geçerli bir telefon numarası girin.');
+                return;
+            }
+            
+            // Success message
+            alert('Talebiniz alındı! En kısa sürede size dönüş yapacağız.\n\nMarka: ' + data.brand + '\nModel: ' + data.model + '\nYıl: ' + data.year + '\nKM: ' + data.km);
+            
+            // Reset form
+            this.reset();
+            
+            // In production, you would send this data to a server
+            // fetch('your-endpoint.php', {
+            //     method: 'POST',
+            //     body: formData
+            // });
+        });
+    }
+
+    // Sell Form
+    const sellForm = document.getElementById('sellForm');
+    if (sellForm) {
+        sellForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Basic validation
+            if (!data.fullname || !data.phone || !data.brand) {
+                alert('Lütfen tüm zorunlu (*) alanları doldurun.');
+                return;
+            }
+            
+            // Phone validation
+            const phonePattern = /^[0-9]{10,11}$/;
+            const cleanPhone = data.phone.replace(/\s/g, '');
+            if (!phonePattern.test(cleanPhone)) {
+                alert('Lütfen geçerli bir telefon numarası girin.');
+                return;
+            }
+            
+            // Email validation (if provided)
+            if (data.email) {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(data.email)) {
+                    alert('Lütfen geçerli bir email adresi girin.');
+                    return;
+                }
+            }
+            
+            // Success message
+            alert('Araç satış talebiniz alındı! En kısa sürede size dönüş yapacağız.\n\nAd Soyad: ' + data.fullname + '\nMarka: ' + data.brand);
+            
+            // Reset form
+            this.reset();
+            
+            // In production, send to server
+            // This form has action="mail.php" so it would normally submit there
+        });
+    }
+
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            
+            // Basic validation
+            if (!data.name || !data.phone || !data.email || !data.message) {
+                alert('Lütfen tüm alanları doldurun.');
+                return;
+            }
+            
+            // Email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(data.email)) {
+                alert('Lütfen geçerli bir email adresi girin.');
+                return;
+            }
+            
+            // Phone validation
+            const phonePattern = /^[0-9]{10,11}$/;
+            const cleanPhone = data.phone.replace(/\s/g, '');
+            if (!phonePattern.test(cleanPhone)) {
+                alert('Lütfen geçerli bir telefon numarası girin.');
+                return;
+            }
+            
+            // Success message
+            alert('Mesajınız gönderildi! En kısa sürede size dönüş yapacağız.\n\nİsim: ' + data.name + '\nİlgilenilen Araç: ' + data.vehicle);
+            
+            // Reset form
+            this.reset();
+        });
+    }
+
+    // ==================== ACTIVE NAV LINK ON SCROLL ====================
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    
+    function setActiveNavLink() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Set home as active if at top
+        if (window.scrollY < 100) {
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === '#home') {
+                    link.classList.add('active');
+                }
+            });
         }
-    });
+    }
     
+    window.addEventListener('scroll', setActiveNavLink);
+
+    // ==================== PHONE NUMBER FORMATTING ====================
+    const phoneInputs = document.querySelectorAll('input[type="tel"]');
     
-    
-    // Portfolio filter
-    var portfolioIsotope = $('.portfolio-container').isotope({
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows'
+    phoneInputs.forEach(input => {
+        input.addEventListener('input', function(e) {
+            // Remove non-numeric characters
+            let value = this.value.replace(/\D/g, '');
+            
+            // Limit to 11 digits
+            if (value.length > 11) {
+                value = value.slice(0, 11);
+            }
+            
+            this.value = value;
+        });
     });
 
-    $('#portfolio-filter li').on('click', function () {
-        $("#portfolio-filter li").removeClass('filter-active');
-        $(this).addClass('filter-active');
-        portfolioIsotope.isotope({filter: $(this).data('filter')});
-    });
-    
-})(jQuery);
+    // ==================== ANIMATION ON SCROLL ====================
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe service cards
+    document.querySelectorAll('.service-card').forEach(card => {
+        observer.observe(card);
+    });
+
+    // Observe step cards
+    document.querySelectorAll('.step-card').forEach(card => {
+        observer.observe(card);
+    });
+
+    // Observe vehicle cards
+    document.querySelectorAll('.vehicle-card').forEach(card => {
+        observer.observe(card);
+    });
+
+    // ==================== INITIALIZE ====================
+    // Set initial states
+    handleScroll();
+    toggleScrollTopButton();
+    setActiveNavLink();
+
+    console.log('Serkan Parla Otomotiv - Website initialized');
+})();
