@@ -1,16 +1,13 @@
 (function ($) {
     "use strict";
     
-    // Smooth scroll behavior for all anchor links
-    $('html').css('scroll-behavior', 'smooth');
-    
     // loader
     var loader = function () {
         setTimeout(function () {
             if ($('#loader').length > 0) {
                 $('#loader').removeClass('show');
             }
-        }, 1000);
+        }, 300);
     };
     loader();
     
@@ -114,13 +111,6 @@
         $(this).addClass('filter-active');
         portfolioIsotope.isotope({filter: $(this).data('filter')});
     });
-    
-    // WhatsApp button tooltip
-    $('.whatsapp-float').attr('data-toggle', 'tooltip');
-    $('.whatsapp-float').attr('data-placement', 'left');
-    
-    // Initialize all tooltips
-    $('[data-toggle="tooltip"]').tooltip();
     
 })(jQuery);
 
