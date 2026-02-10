@@ -7,7 +7,7 @@
             if ($('#loader').length > 0) {
                 $('#loader').removeClass('show');
             }
-        }, 1);
+        }, 300);
     };
     loader();
     
@@ -40,18 +40,25 @@
     });
     
     
-    // Smooth scrolling on the navbar links
-    $(".navbar-nav a").on('click', function (event) {
-        if (this.hash !== "") {
+    // Smooth scrolling on all anchor links including navbar
+    $('a[href^="#"]').on('click', function (event) {
+        var target = $(this.hash);
+        if (target.length) {
             event.preventDefault();
             
             $('html, body').animate({
-                scrollTop: $(this.hash).offset().top - 45
+                scrollTop: target.offset().top - 45
             }, 1500, 'easeInOutExpo');
             
+            // Update active class on navbar links
             if ($(this).parents('.navbar-nav').length) {
                 $('.navbar-nav .active').removeClass('active');
                 $(this).closest('a').addClass('active');
+            }
+            
+            // Close mobile navbar after click
+            if ($('.navbar-collapse').hasClass('show')) {
+                $('.navbar-toggler').click();
             }
         }
     });
