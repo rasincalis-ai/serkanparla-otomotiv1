@@ -1,0 +1,11 @@
+{
+  "name": "serkanparla-otomotiv1-updater",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "update": "node scripts/fetch-sahibinden.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.41.2"
+  }
+}
