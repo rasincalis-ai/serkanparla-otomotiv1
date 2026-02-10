@@ -1,0 +1,41 @@
+{
+  "updated_at": "2026-02-10T19:00:00Z",
+  "items": [
+    {
+      "title": "2018 BMW 3.20i ED Luxury Line",
+      "city": "İstanbul",
+      "price": 850000,
+      "year": 2018,
+      "status": "active",
+      "source": "sahibinden",
+      "url": "https://www.sahibinden.com/ilan/vasita-otomobil-bmw-3-serisi-3.20i-ed-luxury-line-test"
+    },
+    {
+      "title": "2016 Mercedes C 180 AMG",
+      "city": "Ankara",
+      "price": 720000,
+      "year": 2016,
+      "status": "active",
+      "source": "sahibinden",
+      "url": "https://www.sahibinden.com/ilan/vasita-otomobil-mercedes-c-serisi-c-180-amg-test"
+    },
+    {
+      "title": "2015 Audi A4 2.0 TDI",
+      "city": "İzmir",
+      "price": 650000,
+      "year": 2015,
+      "status": "active",
+      "source": "sahibinden",
+      "url": "https://www.sahibinden.com/ilan/vasita-otomobil-audi-a4-2.0-tdi-test"
+    },
+    {
+      "title": "2014 Volvo S60 1.6 D",
+      "city": "İstanbul",
+      "price": 450000,
+      "year": 2014,
+      "status": "closed",
+      "source": "sahibinden",
+      "url": "https://www.sahibinden.com/ilan/vasita-otomobil-volvo-s60-1.6-d-test-old"
+    }
+  ]
+}
