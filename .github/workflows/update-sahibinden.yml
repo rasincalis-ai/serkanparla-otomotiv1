@@ -2,7 +2,11 @@ name: Update Sahibinden Listings
 
 on:
   schedule:
+copilot/update-workflow-schedule
+    - cron: '*/30 * * * *' # her 30 dakikada bir
+
     - cron: '0 * * * *' # her saat başı
+ main
   workflow_dispatch:
 
 jobs:
