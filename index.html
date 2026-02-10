@@ -378,99 +378,51 @@
                 </a>
             </div>
             
-            <!-- Filter Buttons -->
-            <div class="filter-buttons text-center mb-4">
-                <button class="filter-btn active" data-filter="all">Tümü</button>
-                <button class="filter-btn" data-filter="filter-1">Lüks</button>
-                <button class="filter-btn" data-filter="filter-2">İkonik</button>
-                <button class="filter-btn" data-filter="filter-3">Her Zaman</button>
+            <!-- Resimsiz Sahibinden Tablo -->
+            <div class="listings-header d-flex justify-content-between align-items-center mb-3">
+                <h3 class="m-0">Sahibinden İlanları</h3>
+                <span class="badge rounded-pill text-bg-light border">Kaynak: sahibinden.com</span>
             </div>
-            
-            <!-- Vehicle Cards -->
-            <div class="row g-4" id="vehicleGrid">
-                <div class="col-lg-4 col-md-6 vehicle-item filter-1">
-                    <div class="vehicle-card">
-                        <img src="img/portfolio-1.jpg" alt="2023 VOLVO XC60" loading="lazy">
-                        <div class="vehicle-body">
-                            <h5 class="vehicle-name">2023 VOLVO XC60 PLUS RECHARGE T8 AWD</h5>
-                            <p class="vehicle-price">Fiyat İçin Arayın: <a href="tel:05334235520">0533 423 55 20</a></p>
-                            <div class="vehicle-buttons">
-                                <button class="btn btn-outline-primary">Detaylar</button>
-                                <a href="https://serkanparlaotomotiv.sahibinden.com/" target="_blank" class="btn btn-primary">Sahibinden'de Gör</a>
-                            </div>
-                        </div>
-                    </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label class="form-label">Şehir</label>
+                    <select id="filter-city" class="form-select">
+                        <option value="">Hepsi</option>
+                        <option value="İstanbul">İstanbul</option>
+                        <option value="Ankara">Ankara</option>
+                        <option value="İzmir">İzmir</option>
+                    </select>
                 </div>
-                
-                <div class="col-lg-4 col-md-6 vehicle-item filter-2">
-                    <div class="vehicle-card">
-                        <img src="img/portfolio-2.jpg" alt="2014 BMW 520i" loading="lazy">
-                        <div class="vehicle-body">
-                            <h5 class="vehicle-name">2014 BMW 5.20İ PREMİUM OTOMATİK</h5>
-                            <p class="vehicle-price">Fiyat İçin Arayın: <a href="tel:05334235520">0533 423 55 20</a></p>
-                            <div class="vehicle-buttons">
-                                <button class="btn btn-outline-primary">Detaylar</button>
-                                <a href="https://serkanparlaotomotiv.sahibinden.com/" target="_blank" class="btn btn-primary">Sahibinden'de Gör</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-3">
+                    <label class="form-label">Fiyat (Maks)</label>
+                    <input id="filter-price" type="number" class="form-control" placeholder="Örn: 500000" />
                 </div>
-                
-                <div class="col-lg-4 col-md-6 vehicle-item filter-3">
-                    <div class="vehicle-card">
-                        <img src="img/portfolio-3.jpg" alt="2024 CHERY OMODA5" loading="lazy">
-                        <div class="vehicle-body">
-                            <h5 class="vehicle-name">2024 CHERY OMODA5 1.6 TGDI COMFORT</h5>
-                            <p class="vehicle-price">Fiyat İçin Arayın: <a href="tel:05334235520">0533 423 55 20</a></p>
-                            <div class="vehicle-buttons">
-                                <button class="btn btn-outline-primary">Detaylar</button>
-                                <a href="https://serkanparlaotomotiv.sahibinden.com/" target="_blank" class="btn btn-primary">Sahibinden'de Gör</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button id="apply-filters" class="btn btn-dark w-100">Filtrele</button>
                 </div>
-                
-                <div class="col-lg-4 col-md-6 vehicle-item filter-1">
-                    <div class="vehicle-card">
-                        <img src="img/portfolio-4.jpg" alt="2020 MERCEDES E200" loading="lazy">
-                        <div class="vehicle-body">
-                            <h5 class="vehicle-name">2020 MERCEDES E200 D BURMESTER</h5>
-                            <p class="vehicle-price">Fiyat İçin Arayın: <a href="tel:05334235520">0533 423 55 20</a></p>
-                            <div class="vehicle-buttons">
-                                <button class="btn btn-outline-primary">Detaylar</button>
-                                <a href="https://serkanparlaotomotiv.sahibinden.com/" target="_blank" class="btn btn-primary">Sahibinden'de Gör</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 vehicle-item filter-2">
-                    <div class="vehicle-card">
-                        <img src="img/portfolio-5.jpg" alt="2023 OPEL ASTRA" loading="lazy">
-                        <div class="vehicle-body">
-                            <h5 class="vehicle-name">2023 OPEL ASTRA 1.2T EDITION</h5>
-                            <p class="vehicle-price">Fiyat İçin Arayın: <a href="tel:05334235520">0533 423 55 20</a></p>
-                            <div class="vehicle-buttons">
-                                <button class="btn btn-outline-primary">Detaylar</button>
-                                <a href="https://serkanparlaotomotiv.sahibinden.com/" target="_blank" class="btn btn-primary">Sahibinden'de Gör</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 vehicle-item filter-3">
-                    <div class="vehicle-card">
-                        <img src="img/portfolio-6.jpg" alt="2024 BYD ATTO 3" loading="lazy">
-                        <div class="vehicle-body">
-                            <h5 class="vehicle-name">2024 BYD ATTO 3 DESİGN 204HP</h5>
-                            <p class="vehicle-price">Fiyat İçin Arayın: <a href="tel:05334235520">0533 423 55 20</a></p>
-                            <div class="vehicle-buttons">
-                                <button class="btn btn-outline-primary">Detaylar</button>
-                                <a href="https://serkanparlaotomotiv.sahibinden.com/" target="_blank" class="btn btn-primary">Sahibinden'de Gör</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Başlık</th>
+                            <th>Şehir</th>
+                            <th>Fiyat</th>
+                            <th>Yıl</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listing-body"><!-- JS ile doldurulacak --></tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="https://serkanparlaotomotiv.sahibinden.com/" target="_blank" class="btn btn-sahibinden btn-lg">
+                    Tüm İlanlar İçin Sahibinden Mağazamızı Ziyaret Edin
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -664,5 +616,6 @@
     
     <!-- Custom JS -->
     <script src="js/main.js"></script>
+    <script src="js/listings.js"></script>
 </body>
 </html>

@@ -961,3 +961,37 @@ img {
         font-size: 1.75rem;
     }
 }
+
+/* ==================== NAVBAR LOGO İYİLEŞTİRME ==================== */
+.navbar-brand img {
+  height: clamp(24px, 2.6vw, 36px);
+  width: auto;
+  display: block;
+}
+.navbar {
+  padding: 0.75rem 0; /* biraz daha kompakt navbar */
+}
+
+/* ==================== HERO İYİLEŞTİRME ==================== */
+.hero-banner {
+  padding: 72px 0 56px;
+}
+.evaluation-card {
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.12);
+}
+.form-title {
+  font-weight: 700;
+}
+
+/* ==================== SAHİBİNDEN RESİMSİZ TABLO ==================== */
+.listings-section .table {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.listings-section .badge {
+  background: #eef2ff;
+  color: #4338ca;
+  border: 1px solid #c7d2fe !important;
+}
